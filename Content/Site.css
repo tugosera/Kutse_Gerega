@@ -1,0 +1,54 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.ankeet-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:"Montserrat";
+}
+.thanks-content {
+    padding:20px;
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    border: 4px #515666 solid;
+    border-radius: 15px;
+}
+.thanks-content div {
+    padding-bottom:15px;
+}
+.thanks-content a {
+    padding: 3px 26px 3px 26px;
+    margin-top: 15px;
+    font-size:26px;
+}
+.thanks-content img {
+    border: 2px solid red;
+    border-radius: 12px;
+    transition: content border 2.5s;
+}
+.thanks-content img:hover {
+    content: url("../Images/zxccat_vigljadivaet.jpg");
+    border:5px solid purple;
+}
