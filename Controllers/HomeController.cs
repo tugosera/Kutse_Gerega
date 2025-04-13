@@ -31,6 +31,7 @@ namespace kutse_app.Controllers
             ViewBag.Greeting = hour < 10 ? "Hommikust!" : (hour < 17 ? "Päevast!" : (hour < 21 ? "Õhtust!" : "Head ööd!"));
             return View();
         }
+
         [HttpGet]
         public ViewResult Ankeet()
         {
@@ -45,6 +46,8 @@ namespace kutse_app.Controllers
             return View("Thanks", guest);
         }
 
+
+        
 
         [HttpPost]
         public ViewResult Ankeet(Guest guest)
@@ -84,6 +87,13 @@ namespace kutse_app.Controllers
             {
                 ViewBag.Message = exception;
             }
+        }
+
+        guestContext db = new guestContext();
+        public ActionResult Guests()
+        {
+            IEnumerable<Guest> guests = db.Guests;
+            return View(guests);
         }
     }
 }
