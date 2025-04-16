@@ -31,28 +31,16 @@ namespace kutse_app.Controllers
             ViewBag.Greeting = hour < 10 ? "Hommikust!" : (hour < 17 ? "Päevast!" : (hour < 21 ? "Õhtust!" : "Head ööd!"));
             return View();
         }
-
         [HttpGet]
         public ViewResult Ankeet()
         {
             return View();
         }
 
-
-        [HttpPost]
-        public ActionResult SendEmailAgain(Guest guest)
-        {
-            E_Mail(guest, true); // теперь vastus = true
-            return View("Thanks", guest);
-        }
-
-
-        
-
         [HttpPost]
         public ViewResult Ankeet(Guest guest)
         {
-            E_Mail(guest, false);
+            E_Mail(guest);
             if (ModelState.IsValid)
             {
                 return View("Thanks", guest);
@@ -62,7 +50,7 @@ namespace kutse_app.Controllers
                 return View();
             }
         }
-        public void E_Mail(Guest guest, bool vastus)
+        public void E_Mail(Guest guest)
         {
             try
             {
@@ -72,16 +60,9 @@ namespace kutse_app.Controllers
                 WebMail.UserName = "tarikpikarik@gmail.com";
                 WebMail.Password = "jwvq nlic uouq fxzx";
                 WebMail.From = "tarikpikarik@gmail.com";
-                if (vastus == false)
-                {
-                    WebMail.Send(guest.Email, "Vastus kutsele", guest.Name + " Vastus " + ((guest.WillAttend ?? false) ?
-                        "tuleb poele " : "ei tule poele"));
-                }
-                else
-                {
-                    WebMail.Send(guest.Email, "Tere", guest.Name + ", ära unusta tulla minu peole" );
-                }
-                    ViewBag.Message = "Kiri on saatnud!";
+                WebMail.Send(guest.Email, "Vastus kutsele", guest.Name + " Vastus " + ((guest.WillAttend ?? false) ?
+                    "tuleb poele " : "ei tule poele"));
+                ViewBag.Message = "Kiri on saatnud!";
             }
             catch (Exception exception)
             {
@@ -89,11 +70,12 @@ namespace kutse_app.Controllers
             }
         }
 
-        guestContext db = new guestContext();
+        GuestContext db = new GuestContext();
         public ActionResult Guests()
         {
             IEnumerable<Guest> guests = db.Guests;
             return View(guests);
         }
+
     }
 }

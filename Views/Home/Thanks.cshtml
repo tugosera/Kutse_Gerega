@@ -1,4 +1,4 @@
-﻿@model kutse_app.Models.Guest
+﻿﻿@model kutse_app.Models.Guest
 
 @{
     ViewBag.Title = "Thanks";
@@ -14,21 +14,14 @@
         <p>
             <img src="~/Images/zxccat.jpg" />
         </p>
-        <form method="post" action="/Home/SendEmailAgain">
-            @Html.HiddenFor(m => m.Name)
-            @Html.HiddenFor(m => m.Email)
-            @Html.HiddenFor(m => m.WillAttend)
-            <button type="submit" class="btn btn-success">Saada meeldetuletus</button>
-        </form>
     }
     else
     {
         @: Väga kurb uudis. Näeme hiljem!
         <p>
             <img src="~/Images/zxccat_terrorblade.jpg" />
-
-            @ViewBag.Message
-            @Html.ActionLink("Vastan", "Ankeet", "Ankeet", new { @class = "btn btn-primary" })
         </p>
     }
+    @ViewBag.Message
+    @Html.ActionLink("Vastan", "Ankeet", "Ankeet", new { @class = "btn btn-primary" })
 </div>
