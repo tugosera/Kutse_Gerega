@@ -43,6 +43,8 @@ namespace kutse_app.Controllers
             E_Mail(guest);
             if (ModelState.IsValid)
             {
+                db.Guests.Add(guest);
+                db.SaveChanges();
                 return View("Thanks", guest);
             }
             else
@@ -71,11 +73,48 @@ namespace kutse_app.Controllers
         }
 
         GuestContext db = new GuestContext();
+        [Authorize]
         public ActionResult Guests()
         {
             IEnumerable<Guest> guests = db.Guests;
             return View(guests);
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Guest guest)
+        {
+            db.Guests.Add(guest);  
+            db.SaveChanges();
+            return RedirectToAction("Guests");
+
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            Guest g = db.Guests.Find(id);
+            if (g == null)
+            {
+                return HttpNotFound();
+            }
+            return View(g);
+        }
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Guest g = db.Guests.Find(id);
+            if (g == null)
+            {
+                return HttpNotFound();
+            }
+            db.Guests.Remove(g);
+            db.SaveChanges();
+            return RedirectToAction("Guests");
+        }
     }
 }
