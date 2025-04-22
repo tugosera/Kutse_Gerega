@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using Kutse.Models;
 
 namespace kutse_app.Controllers
 {
@@ -80,6 +81,14 @@ namespace kutse_app.Controllers
             return View(guests);
         }
 
+        HolidayContext DB = new HolidayContext();
+        [Authorize]
+        public ActionResult Holiday()
+        {
+            IEnumerable<Holiday> holidays = DB.Holidays;
+            return View(holidays);
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -115,6 +124,23 @@ namespace kutse_app.Controllers
             db.Guests.Remove(g);
             db.SaveChanges();
             return RedirectToAction("Guests");
+        }
+        public ActionResult CreateHoliday()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateHoliday(Kutse.Models.Holiday holiday)
+        {
+            if (ModelState.IsValid)
+            {
+                // Здесь логика сохранения в базу или список
+                return RedirectToAction("Holiday");
+            }
+
+            return View(holiday);
         }
     }
 }

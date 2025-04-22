@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HolidayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -177,6 +178,9 @@
     <Compile Include="Models\Guest.cs" />
     <Compile Include="Models\GuestContext.cs" />
     <Compile Include="Models\GuestDBInitializer.cs" />
+    <Compile Include="Models\Holiday.cs" />
+    <Compile Include="Models\HolidayContext.cs" />
+    <Compile Include="Models\HolidayDBInitializer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -265,6 +269,8 @@
     <Content Include="Views\Home\Guests.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\Holiday.cshtml" />
+    <Content Include="Views\Home\CreateHoliday.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
