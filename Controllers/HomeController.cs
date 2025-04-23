@@ -136,11 +136,12 @@ namespace kutse_app.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Здесь логика сохранения в базу или список
-                return RedirectToAction("Holiday");
+                DB.Holidays.Add(holiday);      // Добавление в базу
+                DB.SaveChanges();              // Сохранение изменений
+                return RedirectToAction("Holiday"); // ✅ Исправлено: переход к списку праздников
             }
 
-            return View(holiday);
+            return View(holiday); // Если данные невалидны, остаёмся на форме
         }
     }
 }
